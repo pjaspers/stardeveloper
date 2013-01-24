@@ -1,0 +1,4 @@
+rvm use 1.9.3
+
+# Wasko piggybacks on rvm to set the color of the terminal.
+if command -v wasko >/dev/null 2>&1; then wasko -b adb830; fi
