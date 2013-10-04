@@ -8,6 +8,7 @@ GEM
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
       term-ansicolor (~> 1.0.5)
+    htmlentities (4.3.1)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     mime-types (1.16)
@@ -38,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   heroku
+  htmlentities (~> 4.3.1)
   pg
   rake (~> 10.1.0)
   sequel
