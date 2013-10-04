@@ -77,7 +77,7 @@ class Catcher
   def process_tweet(tweet)
     name = tweet.from_user.downcase
     puts "%s: %s" % [tweet.from_user, decode_full_text(tweet)]
-    t = Tweet.find_or_create(:tweet_id => tweet.id)
+    t = Tweet.find_or_create(:tweet_id => tweet.id.to_s)
     t.name = name
     t.posted_at = tweet.send :created_at
     t.text = tweet.full_text
