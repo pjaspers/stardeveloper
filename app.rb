@@ -3,7 +3,7 @@ require "sinatra"
 
 $db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
 
-$db.create_table :tweets do
+$db.create_table? :tweets do
   primary_key :id
   String :name
   String :text
@@ -12,17 +12,28 @@ $db.create_table :tweets do
 end rescue nil
 
 class Tweet < Sequel::Model
+
+  def link
+    "http://twitter.com/#{self.name}/status/#{self.tweet_id}"
+  end
 end
 
 class App < Sinatra::Base
 
   enable :inline_templates
 
+  helpers do
+  end
+
   get '/' do
     t = Tweet.all.sample
     @message = t.text
     @link = "http://twitter.com/#{t.name}/status/#{t.tweet_id}"
     erb :index
+  end
+
+  get '/list' do
+    erb :list
   end
 end
 
@@ -47,6 +58,18 @@ span {
 }
 
 * { text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+
+ul {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 60px;
+}
+ul li {
+  margin-left: 20px;
+  font-size: 1em;
+  font-style: italic;
+  list-style-type: lower-roman;
+}
 </style>
 <head>
 <body>
@@ -71,3 +94,12 @@ span {
 @@index
 <h1><%=@message%></h1>
 <span><a href="<%= @link %>"><%= @link %></a></span>
+
+@@list
+<ul>
+<% Tweet.order(:posted_at).each_with_index do |tweet, index| %>
+<li>
+<%= tweet.text %> <a href="<%= tweet.link %>"><%= tweet.name %></a>
+</li>
+<% end %>
+</ul>
