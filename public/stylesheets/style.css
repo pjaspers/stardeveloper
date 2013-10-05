@@ -74,6 +74,7 @@ h1 {
     text-transform:uppercase;
     margin:3px;
     text-align: center;
+    line-height: 1.3em;
     color: white;
 }
 #themessager {
