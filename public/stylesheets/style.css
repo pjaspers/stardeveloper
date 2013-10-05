@@ -1,0 +1,100 @@
+/*
+* Font was found [here](https://www.theleagueofmoveabletype.com/chunk)
+* Go check them out, some great fonts
+*/
+@font-face {
+    font-family: "Chunkfive";
+    src: url('/fonts/Chunkfive-webfont.ttf') format('truetype'), url('/fonts/Chunkfive-webfont.otf') format('opentype');
+}
+
+body {
+    font-family: "Chunkfive";
+    background-color: black;
+}
+hr.double {
+    padding: 0;
+    border: 0;
+    border-top: thick double white;
+    color: white;
+    text-align: center;
+}
+hr.double:after {
+    content: "640K is enough";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: black;
+}
+hr.dixit {
+    padding: 0;
+    border: 0;
+    border-top: 3px solid white;
+    color: white;
+    text-align: center;
+}
+hr.dixit:after {
+    content: "Dixit";
+    display: inline-block;
+    position: relative;
+    top: -0.5em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: black;
+}
+hr.thick {
+    border-top: 3px solid white;
+}
+#hear-ye {
+    margin-top: 20px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    color: #FF4358;
+    font-size: 4em;
+    text-align: justify;
+    text-justify: newspaper;
+    letter-spacing: -3px;
+    margin: 0px;
+    text-align: center;
+    font-size: 6em;
+    font-weight: lighter;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#themessage {
+    font-size: 4em;
+}
+#themessage p {
+    text-transform:uppercase;
+    margin:3px;
+    text-align: center;
+    color: white;
+}
+#themessager {
+    text-align: center;
+    text-transform: uppercase;
+}
+#themessager a{
+    color: #E3EDE3;
+    font-size: 3em;
+}
+ul li {
+    margin-top:10px;
+    font-size: 1.8em;
+    text-align: right;
+    list-style-type: lower-roman;
+    color: white;
+    font-weight: lighter;
+}
+ul li.even {
+    color: #BEC7BF;
+}
+ul li a {
+    color: #FF4358;
+}
