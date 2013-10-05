@@ -24,6 +24,7 @@ hr.double:after {
     position: relative;
     top: -0.7em;
     font-size: 1.5em;
+    font-size: 1.5vw;
     padding: 0 0.25em;
     background: black;
 }
@@ -40,6 +41,7 @@ hr.dixit:after {
     position: relative;
     top: -0.5em;
     font-size: 1.5em;
+    font-size: 1.5vw;
     padding: 0 0.25em;
     background: black;
 }
@@ -55,13 +57,14 @@ hr.thick {
 }
 h1 {
     color: #FF4358;
-    font-size: 4em;
+    font-size: 6em;
+    font-size: 6vw;
     text-align: justify;
     text-justify: newspaper;
     letter-spacing: -3px;
     margin: 0px;
     text-align: center;
-    font-size: 6em;
+
     font-weight: lighter;
     overflow: hidden;
     white-space: nowrap;
@@ -69,6 +72,7 @@ h1 {
 }
 #themessage {
     font-size: 4em;
+    font-size: 6vw;
 }
 #themessage p {
     text-transform:uppercase;
@@ -84,6 +88,7 @@ h1 {
 #themessager a{
     color: #E3EDE3;
     font-size: 3em;
+    font-size: 3vw;
 }
 ul li {
     margin-top:10px;
