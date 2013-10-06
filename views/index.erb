@@ -3,5 +3,5 @@
 <hr class="thick"/>
 <div id="themessage"><p><%=@message%></p></div>
 <hr class="dixit">
-<div id="themessager"><a href="<%= @link %>"><%= @name %></a></div>
+<div id="themessager" style="letter-spacing: <%=letterspacing_for_name(@name)%>px;"><span class="left">☆</span><a href="<%= @link %>"><%= @name %></a><span class="right">☆</span></div>
 <hr class="thick"/>

@@ -21,6 +21,14 @@ end
 class App < Sinatra::Base
 
   helpers do
+    def letterspacing_for_name(name)
+      length = (name || "").length
+      if length <= 4
+        70
+      else
+        50 - (length - 5)*4
+      end
+    end
   end
 
   get '/' do
