@@ -1,6 +1,15 @@
+<hr class="double" />
 <h1>Upload your Twitter archive</h1>
+<hr class="thick"/>
+
 <form method="post" action="/csv" enctype="multipart/form-data">
+  <label for="file">
+    CSV from your Twitter archive
+  </label>
   <input type="file" name="file" />
+  <label for="username">
+    Twitter username
+  </label>
   <input type="text" name="username" />
   <input type="submit" value="Upload" />
 </form>
