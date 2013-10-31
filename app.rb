@@ -1,5 +1,7 @@
 require "sequel"
 require "sinatra"
+require 'csv'
+require 'time'
 
 $db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
 
@@ -41,5 +43,32 @@ class App < Sinatra::Base
 
   get '/list' do
     erb :list
+  end
+
+  get '/csv' do
+    erb :csv
+  end
+
+  post '/csv' do
+    tempfile = params[:file][:tempfile]
+    username = params[:username]
+    tweets = [];
+    output = []
+    puts tempfile.path
+    CSV.foreach(tempfile.path, encoding: 'utf-8') do |r|
+      if !!r.detect{|s| s =~ /stardeveloper/}
+        tweets << r
+      end
+    end
+    output << "Found #{tweets.count} tweets"
+    tweets.each do |tweet|
+      t = Tweet.find_or_create(tweet_id: tweet.first)
+      t.name = username
+      t.posted_at = Time.parse(tweet[3])
+      t.text = tweet[5]
+      t.save
+      output << ("Saving tweet: %s" % t.text)
+    end
+    output.join("\n")
   end
 end
