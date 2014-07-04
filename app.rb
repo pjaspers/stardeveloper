@@ -33,12 +33,23 @@ class App < Sinatra::Base
     end
   end
 
+  get "/developer/:developer" do
+    @tweets = Tweet.where( name: params[:developer] )
+    erb :list
+  end
+
+  get "/tweet/:tweet_id" do
+    @tweet = Tweet.where( tweet_id: params[:tweet_id] ).first
+    erb :index
+  end
+
   get '/' do
     @tweet = Tweet.all.sample
     erb :index
   end
 
   get '/list' do
+    @tweets = Tweet
     erb :list
   end
 
