@@ -45,6 +45,10 @@ class App < Sinatra::Base
     erb :list
   end
 
+  get '/league' do
+    erb :league
+  end
+
   get '/csv' do
     erb :csv
   end

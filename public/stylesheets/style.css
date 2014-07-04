@@ -129,9 +129,14 @@ ul li {
     margin-top:10px;
     font-size: 1.8em;
     text-align: right;
-    list-style-type: binary;
     color: #BBC4CB;
     font-weight: lighter;
+}
+ul li {
+    list-style-type:none;
+}
+ul#all-tweets li {
+    list-style-type: binary;
 }
 ul li.even {
     color: #BEC7BF;
