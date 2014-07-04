@@ -2,7 +2,7 @@
 <h1>#STARDEVELOPER</h1>
 <hr class="thick"/>
 <ul id='all-tweets'>
-  <% Tweet.order(:posted_at).each_with_index do |tweet, index| %>
+  <% @tweets.order(:posted_at).each_with_index do |tweet, index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
       <%= tweet.text %> <a href="<%= tweet.link %>"><%= tweet.name %></a>
     </li>
