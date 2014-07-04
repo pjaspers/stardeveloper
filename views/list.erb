@@ -4,7 +4,14 @@
 <ul id='all-tweets'>
   <% @tweets.order(:posted_at).each_with_index do |tweet, index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
-      <%= tweet.text %> <a href="<%= tweet.link %>"><%= tweet.name %></a>
+      <p>
+        <a href="/tweet/<%=tweet.tweet_id %>">
+          <%= tweet.text %>
+        </a>
+      </p>
+      <a href="/developer/<%= tweet.name %>">
+        <%= tweet.name %>
+      </a>
     </li>
   <% end %>
 </ul>

@@ -97,6 +97,10 @@ h1 {
     font-size: 4em;
     font-size: 6vw;
 }
+#all-tweets p a{
+    text-decoration:none;
+    color: #BBC4CB;
+}
 #themessage p a{
     text-transform:uppercase;
     margin:3px;
