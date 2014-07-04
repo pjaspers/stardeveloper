@@ -1,7 +1,17 @@
 <hr class="double" />
-<h1>#STARDEVELOPER</h1>
+<h1>
+  <a href="/tweet/<%= @tweet.tweet_id%>">
+    #STARDEVELOPER
+  </a>
+</h1>
 <hr class="thick"/>
-<div id="themessage"><p><%=@message%></p></div>
+<div id="themessage">
+  <p>
+    <a href="<%=@tweet.link %>">
+      <%=@tweet.text%>
+    </a>
+  </p>
+</div>
 <hr class="dixit">
-<div id="themessager" style="letter-spacing: <%=letterspacing_for_name(@name)%>px;"><span class="left">☆</span><a href="<%= @link %>"><%= @name %></a><span class="right">☆</span></div>
+<div id="themessager" style="letter-spacing: <%=letterspacing_for_name(@name)%>px;"><span class="left">☆</span><a href="/developer/<%= @tweet.name %>"><%= @tweet.name %></a><span class="right">☆</span></div>
 <hr class="thick"/>

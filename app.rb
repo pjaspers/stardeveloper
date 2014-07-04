@@ -34,10 +34,7 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    t = Tweet.all.sample
-    @message = t.text
-    @name = t.name
-    @link = "http://twitter.com/#{t.name}/status/#{t.tweet_id}"
+    @tweet = Tweet.all.sample
     erb :index
   end
 
