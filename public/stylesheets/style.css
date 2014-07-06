@@ -96,18 +96,20 @@ h1 {
 #themessage {
     font-size: 4em;
     font-size: 6vw;
+    text-align: center;
+    text-transform:uppercase;
+    margin:3px;
+    line-height: 1.3em;
 }
+
+#themessage p a {
+    color: #BBC4CB;
+    text-decoration:none;
+}
+
 #all-tweets p a{
     text-decoration:none;
     color: #BBC4CB;
-}
-#themessage p a{
-    text-transform:uppercase;
-    margin:3px;
-    text-align: center;
-    line-height: 1.3em;
-    color: #BBC4CB;
-    text-decoration:none;
 }
 #themessager {
     /* -webkit-transform: scale(1,4); */
