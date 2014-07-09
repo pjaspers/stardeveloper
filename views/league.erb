@@ -4,7 +4,7 @@
 <ul>
   <% Tweet.order(:count).reverse.group_and_count(:name).map([:name, :count]).each_with_index do |r,index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
-      <%= r.first %>: <%= r.last %>
+      <a href="/developer/<%= r.first %>"><%= r.first %></a>: <%= r.last %>
     </li>
   <% end %>
 </ul>
