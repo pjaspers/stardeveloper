@@ -1,7 +1,7 @@
 <hr class="double" />
 <h1>LEAGUE OF LEGENDS</h1>
 <hr class="thick"/>
-<ul>
+<ul class="extraordinary">
   <% Tweet.order(:count).reverse.group_and_count(:name).map([:name, :count]).each_with_index do |r,index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
       <a href="/developer/<%= r.first %>"><%= r.first %></a>: <%= r.last %>

@@ -159,3 +159,8 @@ ul li a {
 label {
     color: white;
 }
+.extraordinary {
+    -webkit-columns: 3 200px;
+    -moz-columns: 3 200px;
+    columns: 3 200px;
+}
