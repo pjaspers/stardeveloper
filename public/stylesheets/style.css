@@ -165,7 +165,7 @@ label {
     columns: 3 200px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-device-width: 680px) {
     .extraordinary {
         width: 100%;
         padding: 0;
