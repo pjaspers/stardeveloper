@@ -24,10 +24,10 @@ class Catcher
 
   def setup_twitter
     Twitter.configure do |config|
-      config.consumer_key = "***REMOVED***"
-      config.consumer_secret = "***REMOVED***"
-      config.oauth_token = "***REMOVED***"
-      config.oauth_token_secret = "***REMOVED***"
+      config.consumer_key = ENV["TW_CONSUMER_KEY"]
+      config.consumer_secret = ENV["TW_CONSUMER_SECRET"]
+      config.oauth_token = ENV["TW_OAUTH_TOKEN"]
+      config.oauth_token_secret = ENV["TW_OAUTH_TOKEN_SECRET"]
     end
   end
 
