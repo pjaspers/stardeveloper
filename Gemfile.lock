@@ -13,6 +13,7 @@ GEM
       rack
     rake (10.1.1)
     sequel (5.19.0)
+    shack (0.0.4)
     simple_oauth (0.3.1)
     sinatra (2.0.5)
       mustermann (~> 1.0)
@@ -34,6 +35,7 @@ DEPENDENCIES
   pg
   rake (~> 10.1.0)
   sequel
+  shack (~> 0.0.4)
   sinatra (~> 2.0.5)
   sqlite3 (~> 1.4.0)
   twitter (~> 4.8.1)

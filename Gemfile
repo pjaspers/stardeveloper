@@ -5,6 +5,7 @@ ruby "2.6.1"
 gem "sinatra", "~> 2.0.5"
 gem "sequel"
 gem "pg"
+gem "shack", "~> 0.0.4"
 
 # A Ruby interface to the Twitter API.
 # [twitter](http://sferik.github.com/twitter/)
