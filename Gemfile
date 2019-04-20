@@ -17,6 +17,8 @@ gem 'rake', '~> 10.1.0'
 # [htmlentities](https://github.com/threedaymonk/htmlentities)
 gem 'htmlentities', '~> 4.3.1'
 
-group :development do
+group :development, :test do
   gem "sqlite3", "~> 1.4.0"
+  gem "minitest", "~> 5.11.3"
+  gem "rack-test", "~> 1.1.0"
 end

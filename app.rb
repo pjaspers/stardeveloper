@@ -3,7 +3,12 @@ require "sinatra"
 require 'csv'
 require 'time'
 
-$db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
+if ENV["RACK_ENV"] == "test"
+  $db = Sequel.sqlite
+else
+  $db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
+end
+
 
 $db.create_table? :tweets do
   primary_key :id
