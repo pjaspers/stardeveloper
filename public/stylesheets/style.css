@@ -2,9 +2,45 @@
 * Font was found [here](https://www.theleagueofmoveabletype.com/chunk)
 * Go check them out, some great fonts
 */
+body  {
+}
+
+.container {
+    display: grid;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.3fr 1fr 0.1fr;
+    grid-template-areas: "header"
+                         "message"
+                         "footer";
+    grid-gap: 10px;
+}
+
+@media only screen and (min-width: 460px) {
+  .container {
+      grid-template-columns: 0.2fr 0.1fr 0.4fr 0.1fr 0.2fr;
+      grid-template-rows: 0.3fr 1fr 0.1fr;
+      grid-template-areas: ". . header . ."
+                           ". message message message ."
+                           ". . footer . .";
+      grid-gap: 10px;
+  }
+}
+
+.anonymous {
+    fill: red;
+    pointer-events: all;
+}
+.anonymous:hover {
+    fill:white;
+}
 @font-face {
     font-family: "Chunkfive";
-    src: url('/fonts/Chunkfive-webfont.ttf') format('truetype'), url('/fonts/Chunkfive-webfont.otf') format('opentype');
+    src: url('/fonts/ChunkFive-Regular.ttf') format('truetype'), url('/fonts/ChunkFive-Regular.otf') format('opentype');
 }
 
 body {
@@ -17,60 +53,15 @@ body {
                                 #1D1E20 100%);
 }
 
-hr.double {
-    margin-bottom: -19px;
-    padding: 0;
-    border: 0;
-    border-top: thick double #BBC4CB;
-    color: #BBC4CB;
-    text-align: center;
-}
-hr.double:after {
-    content: "640K is enough";
-    display: inline-block;
-    position: relative;
-    top: -0.7em;
-    font-size: 1.5em;
-    font-size: 1.5vw;
-    padding: 0 0.25em;
-    background: #1D1E20;
-}
-hr.dixit {
-    margin-bottom: -19px;
-    padding: 0;
-    border: 0;
-    border-top: 3px solid #BBC4CB;
-    color: #BBC4CB;
-    text-align: center;
-}
-hr.dixit:after {
-    content: "Dixit";
-    display: inline-block;
-    position: relative;
-    top: -0.5em;
-    font-size: 1.5em;
-    font-size: 1.5vw;
-    padding: 0 0.25em;
-    background: #1D1E20;
-}
-hr.thick {
-    border-top: 3px solid #BBC4CB;
-}
-#hear-ye {
-    margin-top: 20px;
-    width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 h1 a {
     color: #FF4358;
 }
 
 h1 {
+		grid-area: header;
     color: #FF4358;
-    font-size: 6em;
-    font-size: 6vw;
+    font-size: calc(32px + 4vw);
     text-align: justify;
     text-justify: newspaper;
     letter-spacing: -3px;
@@ -91,27 +82,21 @@ h1 {
 }
 
 #themessage {
-    font-size: 4em;
-    font-size: 6vw;
+    grid-area: message;
+    /* font-size: calc(8*100vw + 64px); */
     text-align: center;
     text-transform:uppercase;
-    margin:3px;
     line-height: 1.3em;
+    overflow: hidden;
 }
 
-#themessage p {
-    margin: 0;
-}
-#themessage p a {
-    color: #BBC4CB;
-    text-decoration:none;
-}
 
 #all-tweets p a{
     text-decoration:none;
     color: #BBC4CB;
 }
 #themessager {
+    grid-area: footer;
     /* -webkit-transform: scale(1,4); */
     text-align: center;
     text-transform: uppercase;
