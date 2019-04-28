@@ -5,6 +5,11 @@
 body  {
 }
 
+.line {
+    transition: fill 2s ease-out;
+    fill: #5d0303;
+}
+
 .container {
     display: grid;
     align-items: center;
@@ -20,7 +25,21 @@ body  {
     grid-gap: 10px;
 }
 
+.anonymous {
+    transition: fill 0.2s linear;
+    fill: white;
+    pointer-events: all;
+}
+
 @media only screen and (min-width: 460px) {
+    .anonymous {
+        transition: fill 0.2s linear;
+        fill: red;
+        pointer-events: all;
+   }
+   .anonymous:hover {
+        fill:white;
+   }
   .container {
       grid-template-columns: 0.2fr 0.1fr 0.4fr 0.1fr 0.2fr;
       grid-template-rows: 0.3fr 1fr 0.1fr;
@@ -31,13 +50,6 @@ body  {
   }
 }
 
-.anonymous {
-    fill: red;
-    pointer-events: all;
-}
-.anonymous:hover {
-    fill:white;
-}
 @font-face {
     font-family: "Chunkfive";
     src: url('/fonts/ChunkFive-Regular.ttf') format('truetype'), url('/fonts/ChunkFive-Regular.otf') format('opentype');

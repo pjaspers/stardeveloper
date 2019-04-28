@@ -47,65 +47,59 @@ end
 %>
 <div id="themessage">
   <%
-  text = <<-TEXT
-  123456789012345 6
-  123456789012345 6
-  123456789012345 6
-  TEXT
-  %>
-  <%
   text = @tweet.text.concat(" ")
-  # text = "Ik kan alles #stardeveloper "
   lines = text.scan(/.{1,16}[ ,;:]/).map(&:strip)
   %>
   <% line_height = 16 %>
-  <% padding_y = 2 %>
+  <% padding_y = 5 %>
   <% x_width = lines.map { |l| width(l) }.max %>
   <% y_height = (lines.length + 2) * line_height %>
   <% other_x_width = (lines.length + 1) * line_height * 2.5 %>
 
-  <svg width="100%" viewBox="0 0  <%= [x_width, y_height + 100].max %> <%= (lines.length + 2) * line_height %>">
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="95%" viewBox="0 0  <%= [x_width + 20, y_height + 100].min %> <%= (lines.length + 2) * (line_height + padding_y) %>">
     <defs>
       <linearGradient id="fire"
                       x1="0" x2="50%" x3="100%
-                      y1="0" y2="100%" >
+                          y1="0" y2="100%" >
         <stop stop-color="rgba(255,255,255,1)" offset="0%"/>
         <stop stop-color="rgba(220,220,220,0.9)" offset="50%"/>
         <stop stop-color="rgba(255,255,255,1)" offset="100%"/>
       </linearGradient>
 
-      <pattern id="space" patternUnits="userSpaceOnUse" width="200" height="90">
-        <image xlink:href="http://bren.zone/i/space.gif" width="200" height="90" preserveAspectRatio="xMidYMid slice"/>
-      </pattern>
+      <filter id="shadow">
+        <feDropShadow dx="1" dy="1" stdDeviation="6"/>
+      </filter>
 
-      <!-- Let's define the pattern -->
-      <!-- The width and height should be double the circle radius we plan to use -->
-      <pattern id="pattern-circles" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-        <!-- Now let's draw the circle -->
-        <!-- We're going to define the `fill` in the CSS for flexible use -->
-        <circle mask="url(#fade)" cx="20" cy="20" r="20" />
-      </pattern>
+      <filter id="dropshadow" widht="130%" height="130%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/> <!-- stdDeviation is how much to blur -->
+        <feOffset dx="1" dy="3" result="offsetblur"/> <!-- how much to offset -->
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.3"/> <!-- slope is the opacity of the shadow -->
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode/> <!-- this contains the offset blurred image -->
+          <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+        </feMerge>
+      </filter>
     </defs>
 
-    <!-- <%= lines.max_by(&:length).length %> <%= lines.length %> -->
-    <% lines.each.with_index do |t, index| %>
-      <g transform="translate(<%= Random.rand(20) %>,1) rotate(<%= (Random.rand(60) - 30)/10.0 %>)">
-        <% if params[:debug] %>
-          <rect x="0" y="<%=2+ (index * (line_height + padding_y)) %>" height="16" fill="url(#fire)" width="<%= width(t) %>" />
-        <% end %>
-        <text font-size="16" fill="#680c0c" x="0" y="<%= line_height + (index * (line_height + padding_y)) %>"><%= t %></text>
-      </g>
-    <% end %>
     <g>
       <% a_x = width(@tweet.name, 12) %>
       <% a_y =  lines.length  * (line_height + padding_y)%>
-      <rect x="<%= x_width - a_x - 8 %>" y="<%= line_height/4 + a_y %>" width="<%= a_x + 12 %>" height="16" fill="red"></rect>
-      <text text-anchor="start" font-size="12" fill="white" x="<%= x_width - a_x - 18 %>" y="<%= line_height + a_y %>">
+      <rect x="<%= x_width - a_x - 8 %>" y="<%= 10+line_height/4 + a_y %>" width="<%= a_x + 12 %>" height="16" fill="red"></rect>
+      <text text-anchor="start" font-size="12" fill="white" x="<%= x_width - a_x - 18 %>" y="<%= 10+line_height + a_y %>">
         <tspan>&ndash;</tspan>
-        <tspan class="anonymous" dx="6"><%= @tweet.name %></tspan>
+        <tspan class="anonymous" dx="6">&nbsp;<%= @tweet.name %></tspan>
       </text>
     </g>
 
+    <!-- <%= lines.max_by(&:length).length %> <%= lines.length %> -->
+    <% lines.each.with_index do |t, index| %>
+      <g transform="translate(<%= Random.rand(20) + 2 %>,1) rotate(<%= (Random.rand(60) - 30)/10.0 %>)">
+        <rect filter="url(#dropshadow)" x="-2" y="<%=10+2+ (index * (line_height + padding_y)) %>" height="16" stroke-width="3" stroke="rgba(65,65,65,0.05)" fill="white" width="<%= width(t) + 2 %>" />
+        <text class="line" font-size="16" fill="white" x="0" y="<%= 10+line_height + (index * (line_height + padding_y)) %>"><%= t %></text>
+      </g>
+    <% end %>
   </svg>
 
   <!-- <p>
