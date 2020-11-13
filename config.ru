@@ -8,7 +8,7 @@ Shack::Middleware.configure do |shack|
 end
 use Shack::Middleware
 
-use Rack::Static, :urls => ['/stylesheets', '/javascripts', '/fonts/'], :root => 'public'
+use Rack::Static, :urls => ['/stylesheets', '/javascripts', '/images', '/fonts/'], :root => 'public'
 
 require "./app"
 map('/')         { run App }
