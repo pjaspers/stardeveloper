@@ -1,15 +1,13 @@
-<hr class="double" />
-<h1>#STARDEVELOPER</h1>
-<hr class="thick"/>
-<ul id='all-tweets'>
+
+<ul class="blocks">
   <% @tweets.order(:posted_at).each_with_index do |tweet, index| %>
-    <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
+    <li class="<%= (index % 2 == 0) ? "even": "less-even" %> blocks__tweet">
       <p>
         <a href="/tweet/<%=tweet.tweet_id %>">
           <%= tweet.text %>
         </a>
       </p>
-      <a href="/developer/<%= tweet.name %>">
+      <a class="blocks__author" href="/developer/<%= tweet.name %>">
         <%= tweet.name %>
       </a>
     </li>

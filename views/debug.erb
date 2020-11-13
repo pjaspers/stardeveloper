@@ -1,0 +1,86 @@
+<style>
+ body {background: yellow !important; }
+</style>
+  <% def width(s, size = 16)
+    s.downcase.chars.inject(0) do |r, c|
+      size_class = {
+        " " => 6,
+        "#" => 12,
+        "@" => 14,
+        ":" => 3,
+        ";" => 3,
+        "," => 3,
+        "'" => 3,
+        '"' => 3,
+        "." => 3,
+        "‘" => 3,
+        "’" => 3,
+        "a" => 10,
+        "b" => 8,
+        "c" => 9,
+        "d" => 9,
+        "e" => 8,
+        "f" => 8,
+        "g" => 10,
+        "h" => 10,
+        "i" => 3,
+        "j" => 7,
+        "k" => 11,
+        "m" => 14,
+        "n" => 11,
+        "o" => 10,
+        "q" => 10,
+        "r" => 10,
+        "s" => 10,
+        "t" => 10,
+        "u" => 10,
+        "v" => 11,
+        "w" => 15,
+        "x" => 10,
+        "y" => 10,
+        "z" => 9,
+      }.fetch(c, 10)
+      r += (size_class / 16.0) * size.to_f
+      r
+    end + (s.chars.select {|c| c != " "}.length) * 1.8
+
+  end
+  %>
+  <% line_height = 16 %>
+  <% padding_y = 2 %>
+  <% chars = (["@Y"] + ("a".."z").to_a + %w(# @ : ; , ' " . ‘ ’) + ['hebben"']).map(&:upcase) %>
+  <svg height="100%" viewBox="0 0 <%= chars.length/4 * 50 %> <%= chars.length/4 * (16+3)%>">
+    <% chars.each_slice(chars.length/4).with_index do |slice, slice_index| %>
+      <g>
+        <% slice.each.with_index do |t, index| %>
+          <rect x="<%= slice_index * 50 %>" y="<%=(index * (line_height + padding_y)) %>" height="<%= line_height %>" stroke-width="1" stroke="red" fill="white" width="<%= width(t) + 2 %>" />
+          <text font-size="16" fill="black" x="<%= slice_index * 50 %>" y="<%= line_height + (index * (line_height + padding_y)) %>"><%= t %></text>
+        <% end %>
+      </g>
+    <% end %>
+  </svg>
+
+  <% [
+    "@JANVANRYSWYCK:",
+    "@BOBVLANDUYT",
+    "@BOBVANLOOVEREN",
+  ].each do |text| %>
+    <div>
+      <svg viewbox="0 0 <%= width(text) + 10%> 20">
+        <g>
+          <rect x="0" y="0"
+                height="16"
+                stroke-width="1"
+                stroke="red"
+                fill="white"
+                width="<%= width(text) + 2 %>" />
+          <text font-size="16"
+                fill="black"
+                x="0"
+                y="16">
+            <%= text %>
+          </text>
+        </g>
+      </svg>
+    </div>
+  <% end %>

@@ -1,10 +1,15 @@
-<hr class="double" />
-<h1>LEAGUE OF LEGENDS</h1>
-<hr class="thick"/>
+<h2 class="ding">
+  <span>
+    LEAGUE OF LEGENDS
+  </span>
+</h2>
 <ul class="extraordinary">
-  <% Tweet.order(:count).reverse.group_and_count(:name).map([:name, :count]).each_with_index do |r,index| %>
-    <li class="<%= (index % 2 == 0) ? "even": "less-even" %>">
-      <a href="/developer/<%= r.first %>"><%= r.first %></a>: <%= r.last %>
+  <% Tweet.order(:count).reverse.group_and_count(:name).map([:name, :count]).each_with_index do |(name,count),index| %>
+    <li class="<%= (index % 2 == 0) ? "even": "less-even" %> extraordinary__box">
+      <p>
+        <a href="/developer/<%= name %>" class="extraordinary__name"><%= name %></a>
+        <span class="extraordinary__count"><%= count %></span>
+      </p>
     </li>
   <% end %>
 </ul>
