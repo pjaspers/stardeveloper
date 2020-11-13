@@ -1,22 +1,11 @@
 <div class="container">
-  <h1>
-    <!-- <a href="/tweet/<%= @tweet.tweet_id%>">
-         #STARDEVELOPER
-         </a> -->
-  </h1>
-
   <div id="themessage">
-    <%
-    text = @tweet.text.concat(" ")
-    lines = text.scan(/.{1,16}[ ,;:]/).map(&:strip)
-    %>
     <% line_height = 16 %>
     <% padding_y = 5 %>
-    <% x_width = lines.map { |l| width(l) }.max %>
-    <% y_height = (lines.length + 2) * line_height %>
-    <% other_x_width = (lines.length + 1) * line_height * 2.5 %>
+    <% x_width = @tweet.lines.map { |l| width(l) }.max %>
+    <% y_height = (@tweet.lines.length + 2) * line_height %>
 
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="95%" viewBox="0 0  <%= [x_width + 20, y_height + 100].min %> <%= (lines.length + 2) * (line_height + padding_y) %>">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="95%" viewBox="0 0  <%= [x_width + 20, y_height + 100].min %> <%= (@tweet.lines.length + 2) * (line_height + padding_y) %>">
       <defs>
         <linearGradient id="fire"
                         x1="0" x2="50%" x3="100%
@@ -62,7 +51,7 @@
 
       <g>
         <% a_x = width(@tweet.name, 12) %>
-        <% a_y =  lines.length  * (line_height + padding_y)%>
+        <% a_y =  @tweet.lines.length  * (line_height + padding_y)%>
         <rect x="<%= x_width - a_x - 8 %>" y="<%= 10+line_height/4 + a_y %>" width="<%= a_x + 12 %>" height="16" fill="red"></rect>
         <text text-anchor="start" font-size="12" fill="white" x="<%= x_width - a_x - 18 %>" y="<%= 10+line_height + a_y %>">
           <tspan>&ndash;</tspan>
@@ -70,8 +59,7 @@
         </text>
       </g>
 
-      <!-- <%= lines.max_by(&:length).length %> <%= lines.length %> -->
-      <% lines.each.with_index do |t, index| %>
+      <% @tweet.lines.each.with_index do |t, index| %>
         <g transform="translate(<%= Random.rand(20) + 2 %>,1) rotate(<%= (Random.rand(60) - 30)/10.0 %>)">
           <rect filter="url(#dropshadow)" x="-2" y="<%=10+1+ (index * (line_height + padding_y)) %>" height="<%= line_height + 3%>" stroke-width="3" stroke="rgba(65,65,65,0.05)" fill="white" width="<%= width(t) + 4 %>" />
           <text class="line" font-size="16" fill="white" x="0" y="<%= 10+line_height + (index * (line_height + padding_y)) %>"><%= t %></text>
@@ -79,22 +67,19 @@
       <% end %>
     </svg>
 
-    <!-- <p>
-         <a href="<%=@tweet.link %>">
-         <%=@tweet.text%>
-         </a>
-         </p> -->
+    <ul class="references"">
+      <% unless @is_permalink %>
+        <li>
+          <a href="<%=@tweet.permalink %>">
+            Permalink
+          </a>
+        </li>
+      <% end %>
+      <li>
+        <a href="<%=@tweet.link %>">
+          Original
+        </a>
+      </li>
+    </ul>
   </div>
-
-  <script type="text/comment">
-   22 karakters is volledig ding
-   Tweet is maximum 280
-
-   Dus splitten in regles van 22, 280/22 = 12 regels
-
-   text = "OH 'Ik vind het wel tof om ook een beetje een gek lief te hebben' #stardeveloper"
-   text.scan(/.{1,25}\W/).map(&:strip)
-
-   words = text.split(" ")
-  </script>
 </div>

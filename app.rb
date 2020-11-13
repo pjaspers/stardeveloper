@@ -20,8 +20,16 @@ end rescue nil
 
 class Tweet < Sequel::Model
 
+  def lines(max_chars: 16)
+    (text + " ").scan(/.{1,#{max_chars}}[ ,;:]/).map(&:strip)
+  end
+
   def link
-    "http://twitter.com/#{self.name}/status/#{self.tweet_id}"
+    "https://twitter.com/#{self.name}/status/#{self.tweet_id}"
+  end
+
+  def permalink
+    "/#{self.name}/status/#{self.tweet_id}"
   end
 end
 
@@ -36,6 +44,7 @@ class App < Sinatra::Base
         50 - (length - 5)*4
       end
     end
+
     def width(s, size = 16)
       s.downcase.chars.inject(0) do |r, c|
         rhinus_size_class = {
@@ -133,8 +142,16 @@ class App < Sinatra::Base
     erb :index
   end
 
+  get "/:name/status/:tweet_id" do
+    @tweet = Tweet.where( tweet_id: params[:tweet_id] ).first
+    @is_permalink = true
+    erb :index
+  end
+
   get '/' do
     @tweet = Tweet.all.sample
+    @text = @tweet.text.concat(" ")
+    @lines = @text.scan(/.{1,16}[ ,;:]/).map(&:strip)
     erb :index
   end
 
