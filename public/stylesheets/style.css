@@ -193,6 +193,11 @@ h1 {
 }
 
 .references > li > a {
+    color: #838383;
+}
+
+.references > li > a:hover {
+    transition: color 0.3s ease-out;
     color: white;
 }
 

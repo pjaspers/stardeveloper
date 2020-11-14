@@ -1,8 +1,7 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
-
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
     <% if @is_permalink %>
       <% meta_attributes(@tweet).each do |attributes| %>
         <meta <%= attributes %>>
