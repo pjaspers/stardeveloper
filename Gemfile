@@ -13,9 +13,12 @@ gem 'twitter', '~> 4.8.1'
 # Rake is a Make-like program implemented in Ruby. Tasks and dependenci...
 # [rake](http://rake.rubyforge.org)
 gem 'rake', '~> 10.1.0'
+
 # A module for encoding and decoding (X)HTML entities.
 # [htmlentities](https://github.com/threedaymonk/htmlentities)
 gem 'htmlentities', '~> 4.3.1'
+
+gem "puma", "~> 5.0.4"
 
 group :development, :test do
   gem "sqlite3", "~> 1.4.0"
