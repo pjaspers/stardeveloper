@@ -1,0 +1,20 @@
+name: CI Joe
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.7.2
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+
+    # Runs a single command using the runners shell
+    - name: Run a one-line script
+      run: |
+        gem install bundler
+        bundle install --local --jobs 4
+        script/test
