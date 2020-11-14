@@ -3,19 +3,20 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1.0">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <% if @tweet %>
+    <% if @is_permalink %>
       <% meta_attributes(@tweet).each do |attributes| %>
         <meta <%= attributes %>>
       <% end %>
       <title>#stardeveloper - <%= @tweet.name %> - <%= @tweet.text %></title>
     <% else %>
       <title>#stardeveloper</title>
+      <% meta_attributes.each do |attributes| %>
+        <meta <%= attributes %>>
+      <% end %>
     <% end %>
   </head>
   <body>
-
     <%= yield %>
-
     <script type="text/test">
      #didyourender
     </script>

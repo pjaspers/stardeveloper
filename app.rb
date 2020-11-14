@@ -127,17 +127,22 @@ class App < Sinatra::Base
       end + (s.chars.select {|c| c != " "}.length) * 1.8
     end
 
-    def meta_attributes(tweet)
-      [
+    def meta_attributes(tweet = nil)
+      attributes = [
         {property: "og:type", content: "website"},
         {property: "og:url", content: request.base_url},
         {property: "og:title", content: "#stardeveloper"},
-        {property: "og:description", content: tweet.text.gsub("'", '"')},
         {property: "og:image", content: [request.base_url, "images/star_og_image.png"].join("/")},
         {name: "twitter:card", content: "summary"},
         {name: "twitter:site", content: "#stardeveloper"},
         {name: "twitter:creator", content: "@pjaspers"}
-      ].map do |data|
+      ]
+      if tweet
+        attributes << {property: "og:description", content: tweet.text.gsub("'", '"')}
+      else
+        attributes << {property: "og:description", content: "#stardeveloper is life"}
+      end
+      attributes.map do |data|
         data.map do |k,v|
           "#{k}='#{v}'"
         end.join(" ")
