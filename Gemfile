@@ -12,7 +12,7 @@ gem "shack", "~> 0.0.4"
 gem 'twitter', '~> 4.8.1'
 # Rake is a Make-like program implemented in Ruby. Tasks and dependenci...
 # [rake](http://rake.rubyforge.org)
-gem 'rake', '~> 10.1.0'
+gem 'rake', '~> 12.3.3'
 
 # A module for encoding and decoding (X)HTML entities.
 # [htmlentities](https://github.com/threedaymonk/htmlentities)
