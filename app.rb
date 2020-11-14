@@ -212,4 +212,6 @@ class App < Sinatra::Base
     end
     output.join("\n")
   end
+
+  run! if app_file == $0
 end
