@@ -12,7 +12,7 @@ gem "shack", "~> 0.0.4"
 gem 'twitter', '~> 4.8.1'
 gem "rake", "~> 13.0.1"
 gem 'htmlentities', '~> 4.3.1'
-gem "puma", "~> 5.0.4"
+gem "puma", "~> 5.6.4"
 
 group :development, :test do
   gem "sqlite3", "~> 1.4.0"
