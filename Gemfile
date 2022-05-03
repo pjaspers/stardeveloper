@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "2.7.2"
 
-gem "sinatra", "~> 2.1.0"
+gem "sinatra", "~> 2.2.0"
 gem "sequel"
 gem "pg"
 gem "shack", "~> 0.0.4"
