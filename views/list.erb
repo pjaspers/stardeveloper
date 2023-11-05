@@ -1,14 +1,14 @@
 
 <ul class="blocks">
-  <% @tweets.order(:posted_at).each_with_index do |tweet, index| %>
+  <% @updates.order(:posted_at).each_with_index do |update, index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %> blocks__tweet">
       <p>
-        <a href="/tweet/<%=tweet.tweet_id %>">
-          <%= tweet.text %>
+        <a href="/update/<%=update.update_id %>">
+          <%= update.text %>
         </a>
       </p>
-      <a class="blocks__author" href="/developer/<%= tweet.name %>">
-        <%= tweet.name %>
+      <a class="blocks__author" href="/stars/<%= update.name %>">
+        <%= update.name %>
       </a>
     </li>
   <% end %>

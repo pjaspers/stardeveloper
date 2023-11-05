@@ -5,7 +5,7 @@ class AppTest < WebTest
   include Rack::Test::Methods
 
   def create_tweet(**options)
-    t = Update.find_or_create(tweet_id: SecureRandom.uuid)
+    t = Update.find_or_create(update_id: SecureRandom.uuid)
     t.name = options[:username] || "itme"
     t.posted_at = options[:posted_at] || Time.now
     t.text = options[:text] || "o hai #stardeveloper"
@@ -13,33 +13,40 @@ class AppTest < WebTest
     t
   end
 
-  def test_it_at_least_renders
+  it "/" do
     create_tweet
     get "/"
     assert_includes last_response.body, "#didyourender"
   end
 
-  def test_it_can_do_a_single
+  it "/debug" do
+    get "/debug"
+
+    assert_includes last_response.body, "#didyourender"
+  end
+
+  it "/developer/:developer" do
+    create_tweet(username: "bob")
+    get "/developer/bob"
+    assert_includes last_response.body, "#didyourender"
+  end
+
+  it "/:name/status/:update_id" do
     t = create_tweet(text: "You hoser!")
-    get "/tweet/#{t.tweet_id}"
+    get "/doesn-t-matter/status/#{t.update_id}"
+
     assert_includes last_response.body, "You hoser!"
   end
 
-  def test_list
+  it "/list" do
     100.times { create_tweet(text: "You hoser!") }
     get "/list"
     assert_includes last_response.body, "#didyourender"
   end
 
-  def test_league
+  it "/league" do
     100.times { create_tweet(username: SecureRandom.alphanumeric(10)) }
     get "/league"
-    assert_includes last_response.body, "#didyourender"
-  end
-
-  def test_developer
-    create_tweet(username: "bob")
-    get "/developer/bob"
     assert_includes last_response.body, "#didyourender"
   end
 end

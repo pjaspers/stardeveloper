@@ -5,3 +5,5 @@ if ENV["RACK_ENV"] == "test"
 else
   $db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
 end
+
+Sequel.default_timezone = :utc

@@ -77,9 +77,24 @@ test = proc do |type|
 end
 # test.call('model')
 test.call('web')
+test.call('lib')
 # test.call('api')
 
 desc "Run all tests"
-task default: [:web_test]
+task default: [:web_test, :lib_test]
 
 task default: :test
+
+desc "Crawl the hashtag"
+task :crawl do
+  require_relative 'lib/mastodon'
+  [
+    "mastodon.social"
+  ].each do |host|
+    Mastodon.new(
+      token: ENV["MA_TOKEN"],
+      tag: "stardeveloper",
+      host: host
+    ).call
+  end
+end

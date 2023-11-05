@@ -6,16 +6,25 @@ require_relative "db"
 
 class Update < Sequel::Model
 
+  KINDS = {
+    twitter: "twitter",
+    mastodon: "mastodon",
+  }
+
   def lines(max_chars: 16)
     (text + " ").scan(/.{1,#{max_chars}}[ ,;:]/).map(&:strip)
   end
 
   def link
-    "https://twitter.com/#{self.name}/status/#{self.tweet_id}"
+    if kind == KINDS[:twitter]
+      "https://twitter.com/#{name}/status/#{self.update_id}"
+    else
+      "https://#{host}/@#{name}/#{update_id}"
+    end
   end
 
   def permalink
-    "/#{self.name}/status/#{self.tweet_id}"
+    "/#{self.name}/status/#{self.update_id}"
   end
 end
 
@@ -136,35 +145,33 @@ class App < Sinatra::Base
     end
   end
 
+  get '/' do
+    @update = Update.all.sample
+
+    erb :index
+  end
+
+
   get "/debug" do
     erb :debug
   end
 
-  get "/developer/:developer" do
-    @tweets = Update.where( name: params[:developer] )
+  get "/stars/:developer" do
+    @updates = Update.where(name: params[:developer])
+
     erb :list
   end
 
-  get "/tweet/:tweet_id" do
-    @tweet = Update.where( tweet_id: params[:tweet_id] ).first
-    erb :index
-  end
-
-  get "/:name/status/:tweet_id" do
-    @tweet = Update.where( tweet_id: params[:tweet_id] ).first
+  get "/:name/status/:update_id" do
+    @update = Update.where( update_id: params[:update_id] ).first
     @is_permalink = true
-    erb :index
-  end
 
-  get '/' do
-    @tweet = Update.all.sample
-    @text = @tweet.text.concat(" ")
-    @lines = @text.scan(/.{1,16}[ ,;:]/).map(&:strip)
     erb :index
   end
 
   get '/list' do
-    @tweets = Update
+    @updates = Update.dataset
+
     erb :list
   end
 

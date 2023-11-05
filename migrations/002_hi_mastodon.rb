@@ -4,5 +4,9 @@ Sequel.migration do
     add_column :tweets, :host, :string
     from(:tweets).update(kind: 'twitter')
     from(:tweets).update(host: "twitter.com")
+
+    rename_column :tweets, :tweet_id, :update_id
+
+    add_index :tweets, :update_id, unique: true
   end
 end

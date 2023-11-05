@@ -7,7 +7,7 @@
   <% Update.order(:count).reverse.group_and_count(:name).map([:name, :count]).each_with_index do |(name,count),index| %>
     <li class="<%= (index % 2 == 0) ? "even": "less-even" %> extraordinary__box">
       <p>
-        <a href="/developer/<%= name %>" class="extraordinary__name"><%= name %></a>
+        <a href="/stars/<%= name %>" class="extraordinary__name"><%= name %></a>
         <span class="extraordinary__count"><%= count %></span>
       </p>
     </li>

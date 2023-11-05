@@ -1,6 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
+    crack (0.4.5)
+      rexml
+    hashdiff (1.0.1)
     htmlentities (4.3.4)
     mini_portile2 (2.8.5)
     minitest (5.11.3)
@@ -9,14 +14,27 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.9)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
+      racc (~> 1.4)
+    public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
+    racc (1.7.3)
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rackup (1.0.0)
+      rack (< 3)
+      webrick
     rake (13.0.1)
+    rexml (3.2.6)
     ruby2_keywords (0.0.2)
     sequel (5.38.0)
     shack (0.0.4)
@@ -30,6 +48,11 @@ GEM
     sqlite3 (1.6.8-aarch64-linux)
     sqlite3 (1.6.8-x86_64-linux)
     tilt (2.0.10)
+    webmock (3.19.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.8.1)
 
 PLATFORMS
   aarch64-linux-musl
@@ -40,13 +63,16 @@ DEPENDENCIES
   htmlentities (~> 4.3.1)
   minitest (~> 5.11.3)
   minitest-hooks (~> 1.5.1)
+  nokogiri (~> 1.15.4)
   puma (~> 6.4.0)
   rack-test (~> 1.1.0)
+  rackup
   rake (~> 13.0.1)
   sequel
   shack (~> 0.0.4)
   sinatra (~> 2.1.0)
   sqlite3 (~> 1.6.3)
+  webmock (~> 3.19.1)
 
 RUBY VERSION
    ruby 3.1.2p20

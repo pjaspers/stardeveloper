@@ -2,10 +2,10 @@
   <div id="themessage">
     <% line_height = 16 %>
     <% padding_y = 5 %>
-    <% x_width = @tweet.lines.map { |l| width(l) }.max %>
-    <% y_height = (@tweet.lines.length + 2) * line_height %>
+    <% x_width = @update.lines.map { |l| width(l) }.max %>
+    <% y_height = (@update.lines.length + 2) * line_height %>
 
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="95%" viewBox="0 0  <%= [x_width + 20, y_height + 100].min %> <%= (@tweet.lines.length + 2) * (line_height + padding_y) %>">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="95%" viewBox="0 0  <%= [x_width + 20, y_height + 100].min %> <%= (@update.lines.length + 2) * (line_height + padding_y) %>">
       <defs>
         <linearGradient id="fire"
                         x1="0" x2="50%" x3="100%
@@ -50,16 +50,16 @@
       </defs>
 
       <g>
-        <% a_x = width(@tweet.name, 12) %>
-        <% a_y =  @tweet.lines.length  * (line_height + padding_y)%>
+        <% a_x = width(@update.name, 12) %>
+        <% a_y =  @update.lines.length  * (line_height + padding_y)%>
         <rect x="<%= x_width - a_x - 8 %>" y="<%= 10+line_height/4 + a_y %>" width="<%= a_x + 12 %>" height="16" fill="red"></rect>
         <text text-anchor="start" font-size="12" fill="white" x="<%= x_width - a_x - 18 %>" y="<%= 10+line_height + a_y %>">
           <tspan>&ndash;</tspan>
-          <tspan class="anonymous" dx="6">&nbsp;<%= @tweet.name %></tspan>
+          <tspan class="anonymous" dx="6">&nbsp;<%= @update.name %></tspan>
         </text>
       </g>
 
-      <% @tweet.lines.each.with_index do |t, index| %>
+      <% @update.lines.each.with_index do |t, index| %>
         <g transform="translate(<%= Random.rand(20) + 2 %>,1) rotate(<%= (Random.rand(60) - 30)/10.0 %>)">
           <rect filter="url(#dropshadow)" x="-2" y="<%=10+1+ (index * (line_height + padding_y)) %>" height="<%= line_height + 3%>" stroke-width="3" stroke="rgba(65,65,65,0.05)" fill="white" width="<%= width(t) + 4 %>" />
           <text class="line" font-size="16" fill="white" x="0" y="<%= 10+line_height + (index * (line_height + padding_y)) %>"><%= t %></text>
@@ -75,13 +75,13 @@
       </li>
       <% unless @is_permalink %>
         <li>
-          <a href="<%=@tweet.permalink %>">
+          <a href="<%=@update.permalink %>">
             Permalink
           </a>
         </li>
       <% end %>
       <li>
-        <a href="<%=@tweet.link %>">
+        <a href="<%=@update.link %>">
           Original
         </a>
       </li>
