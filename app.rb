@@ -2,23 +2,9 @@ require "sequel"
 require "sinatra"
 require 'csv'
 require 'time'
+require_relative "db"
 
-if ENV["RACK_ENV"] == "test"
-  $db = Sequel.sqlite
-else
-  $db = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://stardeveloper.db')
-end
-
-
-$db.create_table? :tweets do
-  primary_key :id
-  String :name
-  String :text
-  Time :posted_at
-  String :tweet_id
-end rescue nil
-
-class Tweet < Sequel::Model
+class Update < Sequel::Model
 
   def lines(max_chars: 16)
     (text + " ").scan(/.{1,#{max_chars}}[ ,;:]/).map(&:strip)
@@ -155,30 +141,30 @@ class App < Sinatra::Base
   end
 
   get "/developer/:developer" do
-    @tweets = Tweet.where( name: params[:developer] )
+    @tweets = Update.where( name: params[:developer] )
     erb :list
   end
 
   get "/tweet/:tweet_id" do
-    @tweet = Tweet.where( tweet_id: params[:tweet_id] ).first
+    @tweet = Update.where( tweet_id: params[:tweet_id] ).first
     erb :index
   end
 
   get "/:name/status/:tweet_id" do
-    @tweet = Tweet.where( tweet_id: params[:tweet_id] ).first
+    @tweet = Update.where( tweet_id: params[:tweet_id] ).first
     @is_permalink = true
     erb :index
   end
 
   get '/' do
-    @tweet = Tweet.all.sample
+    @tweet = Update.all.sample
     @text = @tweet.text.concat(" ")
     @lines = @text.scan(/.{1,16}[ ,;:]/).map(&:strip)
     erb :index
   end
 
   get '/list' do
-    @tweets = Tweet
+    @tweets = Update
     erb :list
   end
 
@@ -203,7 +189,7 @@ class App < Sinatra::Base
     end
     output << "Found #{tweets.count} tweets"
     tweets.each do |tweet|
-      t = Tweet.find_or_create(tweet_id: tweet.first)
+      t = Update.find_or_create(tweet_id: tweet.first)
       t.name = username
       t.posted_at = Time.parse(tweet[3])
       t.text = tweet[5]

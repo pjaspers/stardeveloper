@@ -1,21 +1,11 @@
-# test_helper.rb
-ENV["RACK_ENV"] = "test"
-require "minitest/autorun"
-require "minitest/pride"
-require "rack/test"
-require "securerandom"
+# frozen_string_literal: true
+require_relative 'test_helper'
 
-require File.expand_path "../../app.rb", __FILE__
-
-class MyAppTest < Minitest::Test
+class AppTest < WebTest
   include Rack::Test::Methods
 
-  def app
-    App
-  end
-
   def create_tweet(**options)
-    t = Tweet.find_or_create(tweet_id: SecureRandom.uuid)
+    t = Update.find_or_create(tweet_id: SecureRandom.uuid)
     t.name = options[:username] || "itme"
     t.posted_at = options[:posted_at] || Time.now
     t.text = options[:text] || "o hai #stardeveloper"
