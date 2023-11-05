@@ -146,7 +146,7 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    @update = Update.all.sample
+    @update = Update.order(Sequel.lit("RANDOM()")).first
 
     erb :index
   end
@@ -160,6 +160,13 @@ class App < Sinatra::Base
     @updates = Update.where(name: params[:developer])
 
     erb :list
+  end
+
+  get "/updates/:update_id" do
+    @update = Update.where( update_id: params[:update_id] ).first
+    @is_permalink = true
+
+    erb :index
   end
 
   get "/:name/status/:update_id" do

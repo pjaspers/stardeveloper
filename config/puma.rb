@@ -5,7 +5,7 @@ threads threads_count, threads_count
 preload_app!
 
 rackup      DefaultRackup if defined?(DefaultRackup)
-port        ENV['PORT']     || 3000
+port        ENV['PORT']     || 9292
 environment ENV['RACK_ENV'] || 'development'
 
 # https://github.com/jeremyevans/sequel/blob/0e49e08d4b604546347b7ad18bbfbf684150a443/doc/fork_safety.rdoc

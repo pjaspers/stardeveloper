@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "3.1.2"
+ruby "3.2.2"
 
 gem "sinatra", "~> 2.1.0"
 gem "sequel"
@@ -11,7 +11,7 @@ gem 'htmlentities', '~> 4.3.1'
 gem "puma", "~> 6.4.0"
 gem "nokogiri", "~> 1.15.4"
 
-gem "sqlite3", "~> 1.6.3"
+gem "sqlite3", "~> 1.6.3", force_ruby_platform: true
 group :development, :test do
   gem "minitest", "~> 5.11.3"
   gem "rack-test", "~> 1.1.0"
